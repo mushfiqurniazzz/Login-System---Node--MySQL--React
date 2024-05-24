@@ -1,5 +1,6 @@
 //importing neccessary functions and libraries to be using in the controller functions
 const bcrypt = require("bcryptjs"); //for hashing user's password
+const token = require("../utils/jwt");
 
 //async await signup function which checks if all the input fields are filled then hashes the password to save it in the database using a query
 const SignUpController = async (req, res) => {
@@ -67,8 +68,54 @@ const SignUpController = async (req, res) => {
   }
 };
 
-const LoginController = async () => {
-  console.log("LoginController Was Hit");
+//async await login function which checks if all the input fields are filled then compares the hashed password saved in the database and sends a json web token if is successful
+const LoginController = async (req, res) => {
+  //declaration of variables from req.body
+  const { username, password } = req.body;
+
+  //checking if we get valid input
+  if (!username || username === "" || !password || password === "") {
+    //returning an error message in case of invalid input
+    return res.status(400).send("All Fields are Required");
+  }
+  //using try catch block from here for using await keyword
+  try {
+    //checking if user with same username exists
+    const [
+      checkUsername
+    ] = await req.pool.query(
+      `SELECT COUNT(*) AS count FROM ${process.env
+        .DB_TABLENAME} WHERE username = ?`,
+      [username]
+    );
+    if (checkUsername[0].count < 0) {
+      return res.status(400).send("User with this username doesn't exist");
+    }
+
+    const [checkUserpassword] = await req.pool.query(
+      `SELECT * FROM ${process.env.DB_TABLENAME} WHERE username = ?`,
+      [username]
+    );
+    //the first user is the only user with the same username
+    const foundUser = checkUserpassword[0];
+
+    //comparing the password with the hashed password in the database
+    const matchPassword = bcrypt.compare(password, foundUser.password);
+
+    //if we dont get any error or the matchPassword doen't return false, now we continue with sending a json web token to the user
+
+    //if the matchpassword returns false
+    if (!matchPassword) {
+      return res.status(401).send("Incorrect Password");
+    }
+
+    //more information about the token function in utils/jwt
+    token(foundUser, res);
+  } catch (error) {
+    // basic error handling
+    console.error("Error during login:", error); // log the error
+    res.status(500).send("Internal Server Error"); // return a 500 response in case of error
+  }
 };
 
 module.exports = { SignUpController, LoginController };
