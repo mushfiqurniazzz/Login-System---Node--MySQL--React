@@ -92,6 +92,7 @@ const LoginController = async (req, res) => {
       return res.status(400).send("User with this username doesn't exist");
     }
 
+    //selecting the user with the same username
     const [checkUserpassword] = await req.pool.query(
       `SELECT * FROM ${process.env.DB_TABLENAME} WHERE username = ?`,
       [username]
@@ -118,4 +119,5 @@ const LoginController = async (req, res) => {
   }
 };
 
+//exporting the controller function
 module.exports = { SignUpController, LoginController };
