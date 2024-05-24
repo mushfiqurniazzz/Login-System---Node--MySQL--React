@@ -3,14 +3,14 @@ const express = require("express");
 const app = express();
 
 //importing database function
-const DBConn = require("./config/DBConn")
+const DBConn = require("./config/DBConn");
 
 //importing dotenv library
 require("dotenv").config();
 const port = process.env.PORT || 5000;
 
 //importing auth router here
-const router = require("./routes/AuthRoutes")
+const router = require("./routes/AuthRoutes");
 
 //importing cors library
 const cors = require("cors");
@@ -26,18 +26,25 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 
-//calling the database connection function
-DBConn()
+//creating a IIFE async await function for starting the database connection function as soon as possible and passing it down to the routes and starting the server after it
 
-//declaring  auth router here
-app.use("/auth", router);
+let pool; // initialize the database connection pool
 
-//simple message for all routes on server port that API's are running
-app.get("*", (req, res) => {
-  res.send("API's are running");
-});
+(async () => {
+  //calling the database connection function while declaring it in the pool variable
+  pool = await DBConn();
 
-//making the app run on specified port
-app.listen(port, () => {
-  console.log(`server running on http://localhost:${port}`);
-});
+  // pass the pool to the routes
+  app.use((req, res, next) => {
+    req.pool = pool;
+    next();
+  });
+
+  //declaring  auth router here
+  app.use("/auth", router);
+
+  //making the app run on specified port
+  app.listen(port, () => {
+    console.log(`server running on http://localhost:${port}`);
+  });
+})();

@@ -35,6 +35,10 @@ const DBConn = async () => {
         )`
     );
     console.log(`${process.env.DB_TABLENAME} table created`);
+    
+    //returning the pool to be using in controller functions
+    return pool;
+    
   } catch (error) {
     //basic error handling
     console.error("Error during database connection", error);
