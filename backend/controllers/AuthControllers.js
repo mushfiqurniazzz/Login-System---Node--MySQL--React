@@ -108,10 +108,11 @@ const LoginController = async (req, res) => {
     //if the matchpassword returns false
     if (!matchPassword) {
       return res.status(401).send("Incorrect Password");
+    } else {
+      res.status(200)
+      //more information about the token function in utils/jwt
+      token(foundUser, res);
     }
-
-    //more information about the token function in utils/jwt
-    token(foundUser, res);
   } catch (error) {
     // basic error handling
     console.error("Error during login:", error); // log the error

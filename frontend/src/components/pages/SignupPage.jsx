@@ -2,8 +2,8 @@
 import { useState } from "react"; //use state for state variables
 import axios from "axios"; //axios for communication with backend
 import { toast } from "sonner"; //sonner for toast notification
-import styles from "../styles/Signup.module.css";
-import { Link } from "react-router-dom";
+import styles from "../styles/Signup.module.css"; //module css import
+import { Link, useHistory } from "react-router-dom"; //funcions from library
 
 //creation of the sign up component function
 function SignupPage() {
@@ -11,10 +11,11 @@ function SignupPage() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory(); //for dinamically changing the path
 
-  //axios post function which will first check for valid input, send a post request and then use
+  //axios post function which will first check for valid input, send a post request and then use sonner to render a toast notification
   const handleSignup = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); //disables the reload on submission
     try {
       //check if user has filled all required fields
       if (
@@ -39,18 +40,24 @@ function SignupPage() {
 
       //on successful account creation
       if (res.status === 201) {
-        //notify the client that the user has been created
-        toast.success("User Created Sucessfully");
         setUsername(""); //empty the field after successful signup
         setEmail(""); //empty the field after successful signup
         setPassword(""); //empty the field after successful signup
+        //notify the client that the user has been created
+        toast.success("User Created Sucessfully, Redirecting...");
       }
+
+      setTimeout(() => {
+        history.push("/login");
+      }, 3000);
     } catch (error) {
       //incase of error
       console.error("Error Creating User: ", error);
       toast.error("Error Creating User");
     }
   };
+
+  //bootstrap components
   return (
     <>
       <div className={"card"} id={styles.card}>

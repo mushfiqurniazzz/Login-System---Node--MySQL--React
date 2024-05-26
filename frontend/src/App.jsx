@@ -8,7 +8,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 function App() {
   return (
     <>
-      <Toaster position="top-center" richColors closeButton />
+      <Toaster duration={2000} position="top-center" richColors closeButton />
       <Router>
         <Switch>
           <Route path="/" exact component={SpecialPage} />
