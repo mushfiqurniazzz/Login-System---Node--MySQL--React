@@ -1,12 +1,32 @@
-import styles from "../styles/Special.module.css";
-import { useHistory } from "react-router-dom";
-function SpecialPage() {
-  const history = useHistory();
+//importing functions and libraries to create this home page which will push to login to get the token
+import { useEffect, useRef } from "react"; //react functions
+import styles from "../styles/Special.module.css"; //module css import
+import { useHistory } from "react-router-dom"; //dinamically push to different path without reloading the page
+import { toast } from "sonner"; //import toast notification
 
-  const checkIfToken = localStorage.getItem("token");
-  if (!checkIfToken || checkIfToken === null) {
-    history.push("/login");
-  }
+//creating the functional component
+function SpecialPage() {
+  const history = useHistory(); //declaring for easy use and readability
+  const toastWarningMessage = useRef(false); //for toast notification rendering once
+
+  useEffect(() => {
+    //this function will be called after the component is rendered
+    const checkIfToken = localStorage.getItem("token"); //check for token
+    if (!checkIfToken || checkIfToken === null) {
+      //if token doesn't exist
+      if (toastWarningMessage.current === false) {
+        //if toast is not called
+        toast.warning("No 'Token' Found | Please LogIn first");
+        toastWarningMessage.current = true;
+      }
+      setTimeout(() => {
+        //after 2sec push to /login
+        history.push("/login");
+      }, 2000);
+    }
+  });
+
+  //jsx code here
   return (
     <>
       <div className={styles.container}>
@@ -21,5 +41,5 @@ function SpecialPage() {
     </>
   );
 }
-
+ //exporting the function component
 export default SpecialPage;

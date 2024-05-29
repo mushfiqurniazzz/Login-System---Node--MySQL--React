@@ -1,6 +1,8 @@
-//this is a simple 404 page with some custom styling
+//this is a simple 404 page with some custom styling and routing
 import styles from "../styles/Page.module.css";
+import { Link } from "react-router-dom";
 
+//404 page component function start
 function Page() {
   return (
     <>
@@ -9,7 +11,8 @@ function Page() {
           <h1 id={styles.h1}>404</h1>
           <hr />
           <p id={styles.p}>
-            This page doesn&apos;t exist returning to &apos;HOME PAGE&apos;
+            This page doesn&apos;t exist return to &apos;
+            <Link>HOME PAGE</Link>&apos;
           </p>
         </div>
       </div>
@@ -17,4 +20,5 @@ function Page() {
   );
 }
 
+//exporting the created function
 export default Page;
