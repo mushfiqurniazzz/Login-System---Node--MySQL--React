@@ -1,0 +1,21 @@
+.container {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+
+#div {
+  text-align: center;
+  background-color: black;
+  color: white;
+  padding: 1rem;
+  border-radius: 2rem;
+}
+
+#h1 {
+  font-weight: bold;
+}
+
+#p {
+  font-weight: bold;
+}
