@@ -1,6 +1,12 @@
 import styles from "../styles/Special.module.css";
-
+import { useHistory } from "react-router-dom";
 function SpecialPage() {
+  const history = useHistory();
+
+  const checkIfToken = localStorage.getItem("token");
+  if (!checkIfToken || checkIfToken === null) {
+    history.push("/login");
+  }
   return (
     <>
       <div className={styles.container}>
