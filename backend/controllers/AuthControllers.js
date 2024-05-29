@@ -29,7 +29,7 @@ const SignUpController = async (req, res) => {
         .DB_TABLENAME} WHERE username = ?`,
       [username]
     );
-    if (checkUsername[0].count > 0) {
+    if (checkUsername[0].count === 0) {
       return res.status(400).send("User with same username already exists");
     }
 
@@ -88,7 +88,7 @@ const LoginController = async (req, res) => {
         .DB_TABLENAME} WHERE username = ?`,
       [username]
     );
-    if (checkUsername[0].count < 0) {
+    if (checkUsername[0].count === 0) {
       return res.status(400).send("User with this username doesn't exist");
     }
 
@@ -101,7 +101,7 @@ const LoginController = async (req, res) => {
     const foundUser = checkUserpassword[0];
 
     //comparing the password with the hashed password in the database
-    const matchPassword = bcrypt.compare(password, foundUser.password);
+    const matchPassword = await bcrypt.compare(password, foundUser.password);
 
     //if we dont get any error or the matchPassword doen't return false, now we continue with sending a json web token to the user
 
