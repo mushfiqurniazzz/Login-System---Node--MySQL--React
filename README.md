@@ -1,5 +1,10 @@
 <h1>Login System - Node, MySQL, React</h1>
 <p>This Login System is a fullstack web app thats can authinticate an user, featuring functionalities for saving a user with hashed password in DB, logging in a user by comparing the typed and hashed password and saving a token in the local-storage after login. It uses MYSQL as the database to store users, Express.js for handling server-side logic, React.js for building the user interface, and Node.js for server-side runtime environment. The app provides a seamless experience for developers to authenticate users.</p>
+
+
+https://github.com/mushfiqurniazzz/Login-System---Node--MySQL--React/assets/148959859/ff672ae5-23d1-40a8-b57a-298a745db105
+
+
 <h3>Running the Project Locally</h3>
   <p>To run this project on your local machine, follow these steps:
 
