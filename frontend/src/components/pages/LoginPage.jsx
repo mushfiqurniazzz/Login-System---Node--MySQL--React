@@ -1,5 +1,5 @@
 //importing necessary libraries for login function
-import { useState } from "react"; //use state for state variables
+import { useEffect, useState } from "react"; //use state for state variables
 import axios from "axios"; //axios for communication with backend
 import { toast } from "sonner"; //sonner for toast notification
 import styles from "../styles/Login.module.css"; //module css import
@@ -11,6 +11,10 @@ function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory(); //for dinamically changing the path
+
+  useEffect(() => {
+    document.title = "Login System - LogIn Page"; //dinamically changes the tittle
+  });
 
   //login function with axios
   const handleLogin = async (e) => {
@@ -85,7 +89,7 @@ function LoginPage() {
             </div>
 
             {/* submit and switch to signup buttons */}
-            
+
             {/* sign up */}
             <a>
               <Link to="/signup">Don&apos;t have an account? SignUp</Link>

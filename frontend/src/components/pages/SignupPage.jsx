@@ -1,5 +1,5 @@
 //importing necessarry libraries for signup function
-import { useState } from "react"; //use state for state variables
+import { useState, useEffect } from "react"; //use state for state variables
 import axios from "axios"; //axios for communication with backend
 import { toast } from "sonner"; //sonner for toast notification
 import styles from "../styles/Signup.module.css"; //module css import
@@ -12,6 +12,10 @@ function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory(); //for dinamically changing the path
+
+  useEffect(() => {
+    document.title = "Login System - SignUp Page"; //dinamically changes the tittle
+  });
 
   //axios post function which will first check for valid input, send a post request and then use sonner to render a toast notification
   const handleSignup = async (e) => {
