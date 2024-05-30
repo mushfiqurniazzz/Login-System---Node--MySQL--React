@@ -29,7 +29,7 @@ const SignUpController = async (req, res) => {
         .DB_TABLENAME} WHERE username = ?`,
       [username]
     );
-    if (checkUsername[0].count === 0) {
+    if (checkUsername[0].count > 0) {
       return res.status(400).send("User with same username already exists");
     }
 
