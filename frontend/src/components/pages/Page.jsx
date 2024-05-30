@@ -16,7 +16,7 @@ function Page() {
           <hr />
           <p id={styles.p}>
             This page doesn&apos;t exist return to &apos;
-            <Link>HOME PAGE</Link>&apos;
+            <Link to="/">HOME PAGE</Link>&apos;
           </p>
         </div>
       </div>
