@@ -1,0 +1,50 @@
+body {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  margin: 0;
+  background-image: url(./images/bg.jpg);
+  background-position: center;
+  background-size: cover;
+}
+#card {
+  width: 29rem !important;
+  color: white;
+  height: 26.5rem !important;
+  align-items: center;
+  padding: 1rem;
+  background-color: rgb(71, 97, 96);
+  border: 0.3rem solid white;
+  background-color: rgba(150, 33, 33, 0.445);
+}
+#card h2 {
+  text-align: center;
+  padding-bottom: 1rem;
+  font-weight: bold;
+}
+#card label,
+input {
+  font-weight: bold;
+  margin: 1rem !important;
+  margin-left: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+  font-weight: bold;
+}
+#card button {
+  color: white !important;
+  text-decoration: none !important;
+  margin: 0.343rem !important;
+  font-weight: bold;
+  width: 100%;
+  font-weight: bold;
+}
+#card a {
+  text-decoration: none !important;
+  color: white;
+  margin: 3rem !important;
+  font-weight: bold;
+}
+#card a:hover {
+  cursor: pointer;
+  color: gainsboro;
+}

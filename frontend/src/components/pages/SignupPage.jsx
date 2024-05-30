@@ -62,7 +62,7 @@ function SignupPage() {
     <>
       <div className={"card"} id={styles.card}>
         <div className={"card-body"}>
-          <h2>SignUp</h2>
+          <h2 id={styles.h2}>SignUp</h2>
           <hr />
           <form onSubmit={handleSignup}>
             {/* for Username */}
@@ -103,14 +103,15 @@ function SignupPage() {
 
             {/* submit and switch to login buttons */}
 
-            {/* signup */}
-            <button className={"btn btn-success"} type="submit">
-              SignUp
-            </button>
             {/* login */}
             <a>
               <Link to="/login">Have an account? LogIn</Link>
             </a>
+
+            {/* signup */}
+            <button className={"btn btn-success"} type="submit">
+              SignUp
+            </button>
           </form>
         </div>
       </div>

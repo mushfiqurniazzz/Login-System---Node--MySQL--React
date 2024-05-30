@@ -57,7 +57,7 @@ function LoginPage() {
     <>
       <div className={"card"} id={styles.card}>
         <div className={"card-body"}>
-          <h2>LogIn</h2>
+          <h2 id={styles.h2}>LogIn</h2>
           <hr />
           <form onSubmit={handleLogin}>
             {/* for Username */}
@@ -85,15 +85,20 @@ function LoginPage() {
             </div>
 
             {/* submit and switch to signup buttons */}
-
-            {/* login */}
-            <button className={"btn btn-success"} type="submit">
-              LogIn
-            </button>
+            
             {/* sign up */}
             <a>
               <Link to="/signup">Don&apos;t have an account? SignUp</Link>
             </a>
+
+            {/* login */}
+            <button
+              className={"btn btn-success"}
+              id={styles.button}
+              type="submit"
+            >
+              LogIn
+            </button>
           </form>
         </div>
       </div>
